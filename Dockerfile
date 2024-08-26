@@ -21,5 +21,5 @@ RUN micromamba install -y -n base -f environment.yml && \
    micromamba clean --all --yes
 COPY streamlit_app streamlit_app
 ENTRYPOINT ["streamlit", "run"]
-CMD ["./streamlit_app/main.py","--server.port","8000","--theme.base","dark"]
+CMD ["./streamlit_app/main.py","--server.port","8000","--theme.base","dark"] 
 
