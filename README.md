@@ -3,7 +3,7 @@
 ---
 A sample demonstrating how to deploy a streamlit-chatbot (LLM-powered) User Interface in Azure for demo purposes. This sample is in python and uses [Streamlit](https://streamlit.io/) + [Azure Container Registry (ACR)](https://azure.microsoft.com/en-us/products/container-registry) + [Azure Web App](https://azure.microsoft.com/en-us/products/app-service/containers?activetab=pivot:deploytab) to deploy a chat interface.
 
-![image](./streamlit_app/images/bot.png)
+![image](./streamlit_app/images/arabot.png)
 
 
 ## Pre-requisites
