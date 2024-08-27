@@ -18,12 +18,6 @@ locals {
 # Resource Group
 # ------------------------------------------------------------------------------------------------------
 
-resource "azurerm_resource_group" "rg-registry" {
-  name     = "rg-${var.project}-${var.environment}-${var.location}-registry"
-  location = var.location
-  tags = local.tags
-}
-
 resource "azurerm_resource_group" "rg" {
   name     = "rg-${var.project}-${var.environment}-${var.location}"
   location = var.location
@@ -33,10 +27,11 @@ resource "azurerm_resource_group" "rg" {
 #-------------------------------------------------------------------------------------------------------
 # Azure Container Registry
 # ------------------------------------------------------------------------------------------------------
+
 resource "azurerm_container_registry" "acr" {
   name                = "acr-${var.project}-${var.environment}-${var.location}"
-  resource_group_name = azurerm_resource_group.rg-registry.name
-  location            = azurerm_resource_group.rg-registry.location
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
   sku                 = "Basic"
   admin_enabled       = true
   tags                = local.tags
@@ -60,7 +55,7 @@ resource "azurerm_service_plan" "service_plan" {
 # ------------------------------------------------------------------------------------------------------
 
 resource "azurerm_linux_web_app" "web_app" {
-  name                = "as-${var.service_name}-${var.project}-${var.environment}-${var.location}"
+  name                = "as-${var.service_name}-${var.environment}-${var.location}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   service_plan_id     = azurerm_service_plan.service_plan.id
