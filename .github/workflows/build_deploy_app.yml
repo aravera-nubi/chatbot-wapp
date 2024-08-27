@@ -38,12 +38,16 @@ jobs:
           docker build -t ${{ secrets.DOCKER_REGISTRY_URL }}/bot:${{ github.sha }} .
           docker push ${{ secrets.DOCKER_REGISTRY_URL }}/bot:${{ github.sha }}
 
-      - name: Deploy
-      - uses: azure/webapps-deploy@v2
+      - name: Deploy web app container
+        uses: azure/webapps-deploy@v3
         with:
           app-name: 'as-arabot-lab-eastus'
-          images: '${{ secrets.DOCKER_REGISTRY_URL }}/bot:${{ github.sha }}'
-      
-      - name: Azure logout
-        run: |
-          az logout     
+          images: ${{ secrets.DOCKER_REGISTRY_URL }}/bot:${{ github.sha }}
+
+      - name: Azure logout via Azure CLI
+        uses: azure/CLI@v2
+        with:
+          inlineScript: |
+            az logout
+            az cache purge
+            az account clear  
