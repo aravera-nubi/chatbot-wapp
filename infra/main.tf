@@ -6,7 +6,6 @@ locals {
     Deadline  = var.deadline
     Owner     = var.owner
     Pod       = var.pod
-    Coe       = var.coe
     Project   = var.project
   }
 }
@@ -74,4 +73,4 @@ resource "azurerm_linux_web_app" "web_app" {
     "DOCKER_REGISTRY_SERVER_PASSWORD" = azurerm_container_registry.acr.admin_password
   }
   
-}
+} 
